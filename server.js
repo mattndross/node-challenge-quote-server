@@ -8,6 +8,9 @@ const app = express();
 
 //load the quotes JSON
 const quotes = require("./quotes.json");
+//const quotesArr = quotes.jason()
+const quotesWithId = require("./quotes-with-id.json")
+
 
 // Now register handlers for some routes:
 //   /                  - Return some helpful welcome info (text)
@@ -18,6 +21,18 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
+function pickFromArray(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+app.get("/quotes", function (request, response) {
+  response.send(quotes);
+});
+
+app.get("/quotes/random", function (req, res) {
+  let random = pickFromArray(quotes);
+  res.send(random);
+});
 
 //...END OF YOUR CODE
 
@@ -25,9 +40,6 @@ app.get("/", function (request, response) {
 //example: pickFromArray([1,2,3,4]), or
 //example: pickFromArray(myContactsArray)
 //
-function pickFromArray(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 //Start our server so that it listens for HTTP requests!
 let port = 5000;
