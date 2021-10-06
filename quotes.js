@@ -1,4 +1,4 @@
-[
+const quotes = [
   {
     quote: "Life isn’t about getting and having, it’s about giving and being.",
     author: "Kevin Kruse",
@@ -465,3 +465,11 @@
     author: "Zig Ziglar",
   },
 ];
+
+const getQuotes = (term, arr) => {
+  return arr.filter(quoteObject => {
+   return quoteObject.quote.toLowerCase().includes(` ${term} `.toLowerCase()); //should use regex
+  })
+}
+
+console.log(getQuotes("miss", quotes))

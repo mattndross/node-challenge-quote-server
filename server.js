@@ -8,7 +8,6 @@ const app = express();
 
 //load the quotes JSON
 const quotes = require("./quotes.json");
-//const quotesArr = quotes.jason()
 const quotesWithId = require("./quotes-with-id.json")
 
 
@@ -21,8 +20,15 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
+//CALLBACKS//
 function pickFromArray(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
+};
+
+const getQuotes = (term, arr) => {
+  return arr.filter(quoteObject => {
+   return quoteObject.quote.toLowerCase().includes(` ${term} `.toLowerCase()); //should use regex
+  })
 }
 
 app.get("/quotes", function (request, response) {
@@ -32,6 +38,11 @@ app.get("/quotes", function (request, response) {
 app.get("/quotes/random", function (req, res) {
   let random = pickFromArray(quotes);
   res.send(random);
+});
+
+app.get("/quotes/search", function (req, res) {
+  const searchQuery = req.query.term
+  res.send(getQuotes(searchQuery, quotes));
 });
 
 //...END OF YOUR CODE
