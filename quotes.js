@@ -473,3 +473,4 @@ const getQuotes = (term, arr) => {
 }
 
 console.log(getQuotes("miss", quotes))
+
