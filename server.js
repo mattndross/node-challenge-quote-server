@@ -6,6 +6,9 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 
+//load lodash module 
+const _ = require("lodash");
+
 //load the quotes JSON
 const quotes = require("./quotes.json");
 const quotesWithId = require("./quotes-with-id.json")
@@ -21,9 +24,9 @@ app.get("/", function (request, response) {
 
 //START OF YOUR CODE...
 //CALLBACKS//
-function pickFromArray(arr) {
+/* function pickFromArray(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
-};
+}; */
 
 const getQuotes = (term, arr) => {
   return arr.filter(quoteObject => {
@@ -36,7 +39,7 @@ app.get("/quotes", function (request, response) {
 });
 
 app.get("/quotes/random", function (req, res) {
-  let random = pickFromArray(quotes);
+  let random = _.sample(quotes);
   res.send(random);
 });
 
